@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <div id="main">
+    <div id="timer">
+      Timer
+    </div>
+
+    <div id="ques">
+       <p id="question"></p>
+    </div>
+    <div class="option">
+        <div class="opt"><p id="opt1"></p></div>
+        <div class="opt"><p id="opt2"></p></div>
+    </div>
+    <div class="option">
+        <div class="opt"><p id="opt3"></p></div>
+        <div class="opt"><p id="opt4"></p></div>
+    </div>
+</div>
+
+<div id="bottom">
+    <div class="btn" id="prev">PREV</div>
+    <div class="btn" id="submit">SUBMIT</div>
+    <div class="btn" id="next">NEXT</div>
+</div>
+<script>
+
+const url="https://opentdb.com/api.php?amount=10";
+ // API for get requests
+ let fetchRes = fetch(url);
+    // fetchRes is the promise to resolve
+    // it by using.then() method
+    fetchRes.then(res =>
+        res.json()).then(d => {
+            console.log(d);
+            let da=JSON.stringify(d);
+            // document.querySelector("#ques").innerHTML=da; 
+            let dada=JSON.parse(da);
+            document.querySelector("#question").innerHTML=dada.results[0].question;  
+            document.querySelector("#opt1").innerHTML=dada.results[0].incorrect_answer[0];
+            document.querySelector("#opt2").innerHTML=dada.results[0].incorrect_answer[1];
+            document.querySelector("#opt3").innerHTML=dada.results[0].incorrect_answer[2];
+            document.querySelector("#opt4").innerHTML=dada.results[0].correct_answer;
+        })
+
+</script>
+</body>
+</html>
